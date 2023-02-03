@@ -6,6 +6,7 @@ let textArea = document.getElementById("textArea");
 let add = document.getElementById("addNote");
 let msg = document.getElementById('msg');
 let newNotes = document.getElementById("notes");
+let searchInput = document.getElementById('search');
  
 form.addEventListener("submit",(event)=>{
     event.preventDefault();
@@ -71,7 +72,7 @@ let  createTask=()=>{
                 </div>
                 <span class="d-flex  flex-row gap-3  options">
                   <button  type="button" data-bs-toggle="modal" data-bs-target="#form" onClick="editTask(this)" class="btn btn-info btn-block px-3 py-2 mr-2">Edit</button>
-                  <button type="button"  onclick="deleteNote(this.id)" class="btn btn-danger btn-block px-2 py-2">Delete
+                  <button type="button"  onclick="deleteNote(this)" class="btn btn-danger btn-block px-2 py-2">Delete
                   </button>
                 </span>
             
@@ -84,8 +85,9 @@ let  createTask=()=>{
 
 };
 
-let deleteTask=(event)=>{
+let deleteNote=(event)=>{
     event.parentElement.parentElement.remove();
+    console.log(event.parentElement.parentElement)
     data.splice(event.parentElement.parentElement.id,1);
     localStorage.setItem("notes",JSON.stringify(data));
 }
@@ -95,7 +97,7 @@ let editTask=(event)=>{
     textArea.value=selectedParent.children[0].children[2].innerHTML;
     dateInput.value=selectedParent.children[0].children[1].innerHTML;
     textInput.value=selectedParent.children[0].children[0].innerHTML;
-    deleteTask(event);
+    deleteNote(event);
   };
 
 
@@ -105,3 +107,35 @@ let editTask=(event)=>{
     textArea.value="";
 
 }
+
+(()=>{
+    data= JSON.parse(localStorage.getItem("notes"))||[];
+    createTask();
+})();
+
+
+searchInput.addEventListener('input', function(e)
+{
+
+   
+    let inputVal = searchInput.value.toLowerCase();
+     console.log(inputVal);
+    
+    let noteCards = document.getElementsByClassName('noteCard');
+    Array.from(noteCards).forEach(function(element)
+    {
+        let cardTxt = element.getElementsByTagName("span")[0].innerText;
+        console.log(cardTxt);
+        if (cardTxt.includes(inputVal))
+        {
+            element.style.display = "block";
+        }
+        else
+        {
+            element.style.display = "none";
+        }
+    
+    })
+});
+
+
