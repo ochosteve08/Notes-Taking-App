@@ -47,18 +47,18 @@ let acceptData =()=>{
 
 localStorage.setItem("notes", JSON.stringify(data));
 
-  createTask();
+createTask();
 };
 
 
-function createTask() {
+let  createTask=()=>{
  
   
-    newNotes.innerHTML="";
+  newNotes.innerHTML="";
 
   data.map((items,index)=>{
 
-    let {note,date,description} = items;
+  let {note,date,description} = items;
 
 
     return (newNotes.innerHTML += 
@@ -78,29 +78,30 @@ function createTask() {
             </div>
         </div>`
       )
-  })
+  });
+
+  resetForm();
 
 };
 
-let search = document.getElementById('searchTxt');
-search.addEventListener('input', function(e)
-{
-    let inputVal = e.target.value.toLowerCase();
-     console.log(inputVal);
-    
-    let noteCards = document.getElementsByClassName('noteCard');
-    Array.from(noteCards).forEach(function(element)
-    {
-        let cardTxt = element.getElementsByTagName("p")[0].innerText;
-        // console.log(cardTxt);
-        if (cardTxt.includes(inputVal))
-        {
-            element.style.display = "block";
-        }
-        else
-        {
-            element.style.display = "none";
-        }
-    
-    })
-});
+let deleteTask=(event)=>{
+    event.parentElement.parentElement.remove();
+    data.splice(event.parentElement.parentElement.id,1);
+    localStorage.setItem("notes",JSON.stringify(data));
+}
+
+let editTask=(event)=>{
+    let selectedParent =event.parentElement.parentElement;
+    textArea.value=selectedParent.children[0].children[2].innerHTML;
+    dateInput.value=selectedParent.children[0].children[1].innerHTML;
+    textInput.value=selectedParent.children[0].children[0].innerHTML;
+    deleteTask(event);
+  };
+
+
+  let resetForm=()=>{
+    textInput.value="";
+    dateInput.value="";
+    textArea.value="";
+
+}
