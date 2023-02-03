@@ -34,7 +34,7 @@
   <section id="note">
     <div class="container">
       <nav class="navbar notes-nav">
-        <button type="button" class="btn px-4 py-2 btn-outline-primary writeNote" data-bs-toggle="modal" data-bs-target="#writeNoteModal">
+        <button type="button" class="btn px-4 py-2 btn-outline-primary writeNote" data-bs-toggle="modal" data-bs-target="#form">
           <span class="fa-solid fa-pen mx-2" aria-hidden="true"></span>Write A
           Note
         </button>
@@ -48,7 +48,7 @@
       <!-- Modal starts here -->
       <form 
              class="modal fade" 
-             id="writeNoteModal" 
+             id="form" 
              tabindex="-1" 
              aria-labelledby="writeNoteModalLabel"
              aria-hidden="true">
@@ -83,9 +83,11 @@
               <button type="button" class="btn btn-secondary px-4 py-2" data-bs-dismiss="modal">
                 Close
               </button>
-              <button type="button" id="addNote" class="btn btn-primary px-4 py-2" data-bs-dismiss="modal">
+              <button type="submit" id="addNote" class="btn btn-primary px-4 py-2" >
                 Add Note
               </button>
+
+              
             </div>
           </div>
         </div>
@@ -98,6 +100,7 @@
       <hr>
 
       <div id="notes" class="row container-fluid">
+        
 
       </div>
     </div>
