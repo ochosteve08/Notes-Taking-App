@@ -70,13 +70,21 @@ hr {
   color: red;
 }
 
+.noteCard{
+  width: 15rem;
+}
+
 @media only screen and (max-width: 676px) {
-  .hero {
+  .hero, .notes-nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
+  #home {
+  height: 600px;
+}
 
   .hero-p {
     font-weight: 300;
@@ -118,4 +126,9 @@ hr {
   font-size: 20px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+}
+
+
+.fa-edit{
+  width: 200px;
 }
